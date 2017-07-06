@@ -33,6 +33,11 @@ public class UtopiaTree {
     /**
      * Message for invalid string format exception
      */
+
+    private static final String TEST_COUNT_RANGE_EXCEPTION = "Test count must be in the span [1, 10]";
+
+    private static final String CYCLE_COUNT_RANGE_EXCEPTION = "Cycles count must be in the span [0, 60]";
+
     private static final String INVALID_INITIAL_STRING = "Invalid initial string. String must contain integer value, that" +
             " corresponds to count of test cases and count of cycles for each test case";
 
@@ -57,6 +62,7 @@ public class UtopiaTree {
 
     /**
      * Constructor initialize  <i>grow step per cycle as 1</i>
+     *
      * @param initialHeight initial height of tree
      */
     public UtopiaTree(int initialHeight) {
@@ -64,9 +70,8 @@ public class UtopiaTree {
     }
 
     /**
-     *
      * @param initialHeight initial height of tree
-     * @param growPerCycle step per cycle
+     * @param growPerCycle  step per cycle
      */
     public UtopiaTree(int initialHeight, int growPerCycle) {
         this.initialHeight = initialHeight;
@@ -75,6 +80,7 @@ public class UtopiaTree {
 
     /**
      * Calculation grow rate for N test cases.
+     *
      * @param initialString String, composed by value, that represents count of test cases, and count of cycles for each test case
      * @return array of row rate for each test case
      * @throws UnacceptableArgumentException On invalid input string
@@ -83,7 +89,7 @@ public class UtopiaTree {
         int[] growRate = null;
         MappedParameters mappedParameters = mapParameters(initialString);
         growRate = new int[mappedParameters.n];
-        for (int i = 0; i < mappedParameters.n; i++){
+        for (int i = 0; i < mappedParameters.n; i++) {
             growRate[i] = makeTestCase(mappedParameters.сycless[i]);
         }
         return growRate;
@@ -91,21 +97,20 @@ public class UtopiaTree {
 
     /**
      * Map string to MappedParameters object
+     *
      * @param initialParameters Initial string with parameters
      * @return instance of MappedParameters, showing number of test cases and cycles for each test case
      * @throws UnacceptableArgumentException On invalid input string
      */
     private MappedParameters mapParameters(String initialParameters) throws UnacceptableArgumentException {
-        if (initialParameters.isEmpty()){
+        if (initialParameters.isEmpty()) {
             throw new UnacceptableArgumentException(INVALID_INITIAL_STRING);
         }
 
         String[] lines = initialParameters.split(LINE_SEPARATOR);
         try {
             int testCount = Integer.parseInt(lines[TEST_COUNT_VALUE_INDEX]);
-            if (testCount != lines.length - 1) {
-                throw new UnacceptableArgumentException(INVALID_INITIAL_STRING);
-            }
+            checkConstraints(testCount, lines);
             int cycles[] = new int[testCount];
             for (int i = 1; i < lines.length; i++) {
                 cycles[i - 1] = Integer.parseInt(lines[i]);
@@ -117,7 +122,24 @@ public class UtopiaTree {
     }
 
     /**
+     * Checking constraints for test count and number of lines
+     * @param testCount count of test case
+     * @param lines count of initial lines
+     * @throws UnacceptableArgumentException On constraint violation
+     */
+    private void checkConstraints(int testCount, String[] lines) throws UnacceptableArgumentException {
+        if (checkConstraintForTestCasesCount(testCount)){
+            throw new UnacceptableArgumentException(TEST_COUNT_RANGE_EXCEPTION);
+        }
+
+        if (testCount != lines.length - 1) {
+            throw new UnacceptableArgumentException(INVALID_INITIAL_STRING);
+        }
+    }
+
+    /**
      * Conduction test case.
+     *
      * @param cycleCount Count of cycles for test case
      * @return integer value of grow rate
      */
@@ -135,6 +157,14 @@ public class UtopiaTree {
             }
         }
         return grow;
+    }
+
+    private boolean checkConstraintForTestCasesCount(int testCaseCount) {
+        return testCaseCount >= 1 && testCaseCount <= 10;
+    }
+
+    private boolean checkConstraintForCyclesCount(int cycleCount){
+        return cycleCount >= 0 && cycleCount <= 60;
     }
 
     public int getInitialHeight() {
