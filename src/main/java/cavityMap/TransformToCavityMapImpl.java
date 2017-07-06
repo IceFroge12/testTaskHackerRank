@@ -8,7 +8,7 @@ import exceptions.UnacceptableArgumentException;
  * @author by yuriygubar on 7/6/17.
  */
 
-public class TransfromToCavityMapImpl implements TransformToCavityMap {
+public class TransformToCavityMapImpl implements TransformToCavityMap {
 
     class MappedParameters {
         int n;

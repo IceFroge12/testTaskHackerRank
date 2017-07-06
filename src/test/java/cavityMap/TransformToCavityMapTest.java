@@ -3,14 +3,12 @@ package cavityMap;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by yuriygubar on 7/6/17.
  */
 public class TransformToCavityMapTest {
     private String initMap;
-    private TransformToCavityMap transformToCavityMap = new TransfromToCavityMapImpl();
+    private TransformToCavityMap transformToCavityMap = new TransformToCavityMapImpl();
 
     @Before
     public void init() {
