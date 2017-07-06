@@ -22,7 +22,6 @@ public interface Fibonacci {
      * <li>If the third argument is less then 3 or grater then 20, then throws UnacceptableArgumentException.
      *
      *
-     *
      * @param t1 first fibonacci number
      * @param t2 second fibonacci number
      * @param n t(n) fibonacci number

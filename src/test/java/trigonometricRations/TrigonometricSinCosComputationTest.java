@@ -1,11 +1,8 @@
-package fibonacci;
+package trigonometricRations;
 
-import exceptions.UnacceptableArgumentException;
 import org.junit.Before;
 import org.junit.Test;
-import trigonometricRations.*;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -13,7 +10,7 @@ import static org.junit.Assert.*;
 /**
  * Created by yuriygubar on 7/6/17.
  */
-public class FibonacciModifiedTest {
+public class TrigonometricSinCosComputationTest {
 
     private double[] initialParam = null;
     private int testCaseCount;

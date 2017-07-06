@@ -46,6 +46,7 @@ public class FibonacciModified implements Fibonacci {
         return a;
     }
 
+
     /**
      * Check initial values constraints.
      * <ul>
